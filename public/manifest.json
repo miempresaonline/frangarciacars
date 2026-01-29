@@ -1,0 +1,30 @@
+{
+  "name": "Fran Garcia - Sistema de Revisión de Vehículos",
+  "short_name": "FG Revisiones",
+  "description": "Sistema profesional de inspección y revisión de vehículos",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0029D4",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/frangarcia-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["automotive", "productivity", "business"],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Mis Revisiones",
+      "short_name": "Revisiones",
+      "description": "Ver mis revisiones asignadas",
+      "url": "/",
+      "icons": []
+    }
+  ],
+  "prefer_related_applications": false
+}
