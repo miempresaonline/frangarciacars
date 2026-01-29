@@ -1,0 +1,118 @@
+INSTRUCCIONES PARA ALOJAR EN PLESK - SUBCARPETA /testimonios
+===============================================================
+
+IMPORTANTE: Esta aplicación está configurada para funcionar en la ruta /testimonios/
+
+1. SUBIR ARCHIVOS
+   - Accede a tu panel de Plesk
+   - Ve a "Archivos" o "File Manager"
+   - Navega a la carpeta "httpdocs" (o "public_html")
+   - Crea una carpeta llamada "testimonios" dentro de httpdocs
+   - Sube TODO el contenido de la carpeta "dist" dentro de httpdocs/testimonios/
+   - NO subas la carpeta "dist" en sí, solo su contenido
+
+2. ESTRUCTURA DE ARCHIVOS EN PLESK
+   Tu estructura debe quedar así:
+
+   httpdocs/
+   └── testimonios/
+       ├── .htaccess
+       ├── _redirects
+       ├── index.html
+       ├── assets/
+       │   ├── index-*.js
+       │   └── index-*.css
+       ├── image.png
+       ├── logo_para_fondos_oscuros.png
+       ├── logo_transparente_v2.png
+       └── xavi-testimonial.mp4
+       (más archivos de imágenes y videos)
+
+3. ACCESO A LA APLICACIÓN
+   - La aplicación estará disponible en: https://tudominio.com/testimonios/
+   - Todas las rutas funcionarán bajo /testimonios/
+
+4. CONFIGURACIÓN DE PHP (OPCIONAL)
+   - Este proyecto es HTML/JS estático, no requiere PHP
+   - Si tienes problemas, asegúrate que Apache está activo
+
+5. VERIFICAR MÓDULOS DE APACHE
+   - Asegúrate que estos módulos estén activos en Plesk:
+     * mod_rewrite (para las rutas)
+     * mod_deflate (para compresión)
+     * mod_expires (para caché)
+     * mod_headers (para headers de seguridad)
+
+   - En Plesk ve a "Apache & nginx Settings"
+   - Verifica que "mod_rewrite" esté habilitado
+
+6. CONFIGURACIÓN SSL/HTTPS (RECOMENDADO)
+   - En Plesk, ve a "SSL/TLS Certificates"
+   - Activa "Let's Encrypt" para certificado gratuito
+   - Marca "Redirect from HTTP to HTTPS"
+
+7. PROBAR EL SITIO
+   - Visita: https://tudominio.com/testimonios/
+   - Verifica que todos los recursos carguen correctamente
+   - Prueba la navegación y que las rutas funcionen
+
+8. SOLUCIÓN DE PROBLEMAS
+
+   Si las rutas no funcionan:
+   - Verifica que el archivo .htaccess esté en httpdocs/testimonios/
+   - Verifica que mod_rewrite esté activo
+   - En Plesk > Apache & nginx Settings, añade:
+     AllowOverride All
+
+   Si los archivos no cargan:
+   - Verifica los permisos (644 para archivos, 755 para carpetas)
+   - En Plesk > File Manager, selecciona todos los archivos
+   - Click derecho > "Change Permissions"
+
+   Si los assets no cargan (CSS/JS):
+   - Verifica que las rutas en el navegador sean:
+     /testimonios/assets/index-*.js
+     /testimonios/assets/index-*.css
+   - Limpia la caché del navegador (Ctrl+Shift+R)
+
+9. OPTIMIZACIÓN
+   - El .htaccess ya incluye:
+     * Compresión Gzip
+     * Caché del navegador
+     * Headers de seguridad
+     * RewriteBase configurado para /testimonios/
+
+   - Para mejor rendimiento, activa en Plesk:
+     * PageSpeed (si está disponible)
+     * Caché de servidor
+
+10. BACKUP
+    - Usa la función de Backup de Plesk regularmente
+    - Guarda una copia local de la carpeta dist
+
+11. ACTUALIZACIONES FUTURAS
+    - NO CAMBIES la configuración base: '/testimonios/' en vite.config.ts
+    - Ejecuta: npm run build
+    - Sube el nuevo contenido de dist/ a httpdocs/testimonios/
+    - Sobrescribe todos los archivos
+    - Limpia la caché del navegador (Ctrl+Shift+R)
+
+12. ALTERNATIVA: USAR SUBDOMINIO
+    Si prefieres usar un subdominio en lugar de /testimonios/:
+
+    a) Crea un subdominio en Plesk (ej: testimonios.tudominio.com)
+    b) Modifica vite.config.ts y cambia:
+       base: '/testimonios/'
+       por:
+       base: '/'
+    c) Modifica .htaccess y cambia:
+       RewriteBase /testimonios/
+       RewriteRule ^ /testimonios/index.html [L]
+       por:
+       RewriteBase /
+       RewriteRule ^ /index.html [L]
+    d) Ejecuta npm run build
+    e) Sube el contenido de dist/ al httpdocs del subdominio
+
+NOTA: Esta es una Single Page Application configurada para /testimonios/
+      Todas las rutas se redirigen a /testimonios/index.html
