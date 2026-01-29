@@ -1,0 +1,15 @@
+{
+    "name": "frangarciacars-monorepo",
+    "version": "1.0.0",
+    "private": true,
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js",
+        "install:all": "npm install && cd apps/landing && npm install && cd ../bienvenida && npm install && cd ../confirmacion && npm install && cd ../formulario-exito && npm install && cd ../sesion && npm install && cd ../testimonios && npm install && cd ../revisiones && npm install",
+        "build:all": "cd apps/landing && npm run build && cd ../bienvenida && npm run build && cd ../confirmacion && npm run build && cd ../formulario-exito && npm run build && cd ../sesion && npm run build && cd ../testimonios && npm run build && cd ../revisiones && npm run build",
+        "postinstall": "npm run install:all"
+    },
+    "dependencies": {
+        "express": "^4.18.2"
+    }
+}
